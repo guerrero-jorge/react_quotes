@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+
 import './App.css';
+import quotes from './quotes.json';
+import Card from './Card'
+import { useState } from 'react';
+
+
 
 function App() {
+
+  const colors=["#808080","#000080","#0000FF","#008080","#FF0000","#008000"]
+  /*const colors=["#845EC2","#C197FF","#00C9A7","#005B44","#FF6F91","#FF8066"]*/
+  
+  const[cita,setCita]=useState(quotes[getNumber(quotes.length)]);
+  const[color,setColor]=useState(colors[getNumber(colors.length)])
+
+  const handleCita= () => {
+
+    setCita(quotes[getNumber(quotes.length)]);
+    setColor(colors[getNumber(colors.length)]);
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{background:color}}>
+
+      <Card  quote={cita.quote} author={cita.author} handleCita={handleCita} color={color}/>
+
     </div>
   );
 }
+
+const getNumber=(max)=>Math.floor(Math.random()*max);
 
 export default App;
